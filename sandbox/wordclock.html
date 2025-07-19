@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://sharp-lewin-e9f3fc.netlify.app/wordclock.html -->
+<html nighteye="disabled" class=" -webkit-"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Word Clock</title>
+  <style>
+	@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);
+
+	* { box-sizing: border-box; }
+
+	body{
+	  font-family:'Josefin Sans', Arial, "Trebuchet MS", sans-serif;
+	  background-color:darkblue;
+	  
+	  /* Codepen flash fix*/
+	  transform:translateZ(0);
+		}
+
+	#clock{
+	  position:relative;
+	  display:block;
+	  color:#000;
+	  font-size:30px;
+	  background: rgb(0,0,139);
+	  width:550px;
+	  padding:70px;
+	  margin:0 auto;
+	  transition:background-color 0.5s linear;
+		}
+
+	#letters, #letters span{
+	   display:inline-block;
+	   line-height:41px;
+	   text-align:center;
+	   transition:all 0.5s linear;
+		}
+		
+	#letters span{
+		width:35px;
+		}
+
+
+	.light{
+	  color:#fff !important;
+	  text-shadow: 0px 0px 5px #fff;
+		}
+
+	#settings, #settings a{
+	  color:#555;
+	  font-size:13px;
+	  width:160px;
+	  margin:10px auto;
+		}
+
+	#settings a:hover{
+	  text-shadow: 0 0 1px #fff;
+		}
+
+	#settings p{
+	  margin:0;
+	  width:100%;
+	  text-align:center;
+		}
+
+	.button{
+	  position:relative;
+	  display:inline-block;
+	  margin:0 4px;
+	  background: linear-gradient(-75deg, rgba(0,0,0,0) 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.0) 100%);
+	  height:20px;
+	  opacity:0.3;
+	  -webkit-transition:opacity 0.5s linear;
+		 -moz-transition:opacity 0.5s linear;
+		  -ms-transition:opacity 0.5s linear;
+		   -o-transition:opacity 0.5s linear;
+			  transition:opacity 0.5s linear;
+	  width:20px;
+		}
+
+	#settings:hover .button{
+		opacity:1;
+		}
+	.button:hover{
+		box-shadow:0 0 3px 0 white inset;
+		}
+
+	.selected:before{
+		content:'✔';
+		position:absolute;
+		color:rgba(255,255,255,0.4);
+		left:5px;
+		top:3px;
+		}
+		
+	/* Background colors for the color Setting*/
+	#darkblue{
+		background-color:rgb(0,0,139);
+		}
+	#darkred{
+		background-color:rgb(139,0,0);
+		}
+	#green{
+		background-color:rgb(100,120,0);
+		}
+	#purple{
+		background-color:rgb(70,40,120);
+		}
+	#orange{
+		background-color:rgb(150,80,0);
+		}
+
+	#desc{
+	  margin:50px auto;
+	  width:420px;
+	  height:520px;
+	  color:white;
+	  font-size:18px;
+		}
+
+	/* dots in the edge for showing the minutes */
+	#e0,#e1,#e2,#e3{ 
+		position:absolute;
+		color:black;    
+		font-size:15px;
+		}
+
+	#e0, #e1{
+	  top:15px;
+		}
+	#e2, #e1{
+	  right:25px;
+		}
+	#e0, #e3{
+	  left:25px;
+		}
+	#e2, #e3{
+	  bottom:20px;
+		}
+
+
+	/* Just some basic styling */
+	h1{
+	  display:block;
+	  color:white;
+	  width:100%;
+	  text-align:center;
+		}
+
+	a{
+	  color:#555;
+	  text-decoration:none;
+		}
+
+	a:hover{
+	  text-shadow:0 0 2px #555;
+		}
+  </style>
+
+  <script src="./assets/prefixfree.min.js.download"></script>
+
+</head>
+
+<body style="">
+  <div id="clock">
+    <span id="e0" class="light"></span>
+    <span id="e1" class="light"></span>
+    <span id="e2" class="light"></span>
+    <span id="e3" class="light"></span>
+
+    <div id="letters"><span class="light">I</span><span class="light">T</span><span>L</span><span class="light">I</span><span class="light">S</span><span>B</span><span>F</span><span>A</span><span>M</span><span>P</span><span>M</span><span>A</span><span>C</span><span>Q</span><span>U</span><span>A</span><span>R</span><span>T</span><span>E</span><span>R</span><span>D</span><span>C</span><span>T</span><span>W</span><span>E</span><span>N</span><span>T</span><span>Y</span><span>F</span><span>I</span><span>V</span><span>E</span><span>X</span><span class="light">H</span><span class="light">A</span><span class="light">L</span><span class="light">F</span><span>B</span><span>T</span><span>E</span><span>N</span><span>F</span><span>T</span><span>O</span><span class="light">P</span><span class="light">A</span><span class="light">S</span><span class="light">T</span><span>E</span><span>R</span><span>U</span><span>N</span><span>I</span><span>N</span><span>E</span><span>O</span><span>N</span><span>E</span><span>S</span><span>I</span><span>X</span><span>T</span><span>H</span><span>R</span><span>E</span><span>E</span><span>F</span><span>O</span><span>U</span><span>R</span><span>F</span><span>I</span><span>V</span><span>E</span><span>T</span><span>W</span><span>O</span><span>E</span><span>I</span><span>G</span><span>H</span><span>T</span><span>E</span><span>L</span><span>E</span><span>V</span><span>E</span><span>N</span><span>S</span><span>E</span><span>V</span><span>E</span><span>N</span><span>T</span><span>W</span><span>E</span><span>L</span><span>V</span><span>E</span><span class="light">T</span><span class="light">E</span><span class="light">N</span><span>S</span><span>E</span><span>O'</span><span>C</span><span>L</span><span>O</span><span>C</span><span>K</span></div>
+  </div>
+
+  <script src="./assets/jquery.min.js.download"></script>
+  <script src="./assets/wordclock.js.download"></script>
+
+
+
+</body></html>
