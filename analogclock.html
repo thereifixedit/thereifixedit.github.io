@@ -1,56 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!--
-  - Full screen clock (12-hour with seconds)
+  - Full screen clock (analog with seconds)
   - Copyright (c) 2022 Project Nayuki. All rights reserved.
   - 
   - https://www.nayuki.io/page/full-screen-clock-javascript
   -->
-<!DOCTYPE html>
-<html style="height:100%; margin:0; padding:0">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>Clock</title>
-		<style type="text/css">
-			/* Customizable font and colors */
-			html {
-				background: #000000;
-				font-family: sans-serif;
-				font-weight: bold;
-				color: #FFFFFF;
-			}
-		</style>
-	</head>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-1 -1 2 2" style="background-color:#000000" stroke="none" fill="none">
+	<defs>
+		<circle id="hour-mark" cx="0" cy="-0.95" r="0.04"/>
+	</defs>
+	<g id="hour-marks" fill="#FFFFFF"/>
 	
-	<body style="display:flex; height:100%; margin:0; padding:0; justify-content:center; align-items:center">
-		<span id="clocktext" style="font-kerning:none"></span>
-		
-		<script>
-			"use strict";
-			
-			let textElem = document.getElementById("clocktext");
-			const targetWidth = 0.9;  // Proportion of full screen width
-			let curFontSize = 20;  // Do not change
-			
-			function updateClock() {
-				const d = new Date();
-				let s = "";
-				s += ((d.getHours() + 11) % 12 + 1) + ":";
-				s += (10 > d.getMinutes() ? "0" : "") + d.getMinutes() + ":";
-				s += (10 > d.getSeconds() ? "0" : "") + d.getSeconds() + "\u00A0";
-				s += d.getHours() >= 12 ? "pm" : "am";
-				textElem.textContent = s;
-				setTimeout(updateClock, 1000 - d.getTime() % 1000 + 20);
-			}
-			
-			function updateTextSize() {
-				for (let i = 0; 3 > i; i++) {  // Iterate for better better convergence
-					curFontSize *= targetWidth / (textElem.offsetWidth / textElem.parentNode.offsetWidth);
-					textElem.style.fontSize = curFontSize + "pt";
-				}
-			}
-			
-			updateClock();
-			updateTextSize();
-			window.addEventListener("resize", updateTextSize);
-		</script>
-	</body>
-</html>
+	<g id="hands" stroke="#FFFFFF" stroke-linecap="round" style="display:none">
+		<line id="hour-hand"   x1="0" y1="0" x2="0" y2="-0.50" stroke-width="0.11"/>
+		<line id="minute-hand" x1="0" y1="0" x2="0" y2="-0.75" stroke-width="0.07"/>
+		<line id="second-hand" x1="0" y1="0" x2="0" y2="-0.85" stroke-width="0.04"/>
+	</g>
+	
+	
+	<script>
+	<![CDATA[
+	"use strict";
+	
+	function initialize() {
+		for (let i = 0; i < 12; i++) {
+			let elem = document.getElementById("hour-marks").appendChild(
+				document.createElementNS(document.documentElement.namespaceURI, "use"));
+			elem.setAttribute("href", "#hour-mark");
+			rotateElem(elem, i / 12 * 360);
+		}
+		updateClock();
+		document.getElementById("hands").removeAttribute("style");
+	}
+	
+	function updateClock() {
+		const d = new Date();
+		rotateElem(document.getElementById("hour-hand"),
+			(d.getHours() + d.getMinutes() / 60 + d.getSeconds() / 3600) / 12 * 360);
+		rotateElem(document.getElementById("minute-hand"),
+			(d.getMinutes() + d.getSeconds() / 60) / 60 * 360);
+		rotateElem(document.getElementById("second-hand"),
+			d.getSeconds() / 60 * 360);
+		setTimeout(updateClock, 1000 - d.getTime() % 1000 + 20);
+	}
+	
+	function rotateElem(elem, degrees) {
+		elem.setAttribute("transform", "rotate(" + degrees + ")");
+	}
+	
+	initialize();
+	]]>
+	</script>
+</svg>
