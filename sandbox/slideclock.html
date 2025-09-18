@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>Slide Clock</title>
+
+    <link rel="canonical" href="https://codepen.io/Alca/pen/BZbPrE">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300");
+body {
+  text-align: center;
+  background-color: #0e141b;
+  color: rgba(224, 230, 235, 0.89);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+.column,
+.colon {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 86px;
+  line-height: 86px;
+}
+
+.column {
+  transition: transform 300ms;
+}
+
+.colon {
+  transition: transform 300ms;
+  transform: translateY(calc(50vh - 43px));
+}
+.colon:after {
+  content: ":";
+}
+
+.num {
+  transition: opacity 500ms, text-shadow 100ms;
+  opacity: 0.025;
+}
+.num.visible {
+  opacity: 1;
+  text-shadow: 1px 1px 0px #336699;
+}
+.num.close {
+  opacity: 0.35;
+}
+.num.far {
+  opacity: 0.15;
+}
+.num.distant {
+  opacity: 0.1;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+</div>
+<div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+  <div class="num">6</div>
+  <div class="num">7</div>
+  <div class="num">8</div>
+  <div class="num">9</div>
+</div>
+<div class="colon"></div>
+<div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+</div>
+<div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+  <div class="num">6</div>
+  <div class="num">7</div>
+  <div class="num">8</div>
+  <div class="num">9</div>
+</div>
+<div class="colon"></div>
+<div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+</div>
+<div class="column">
+  <div class="num">0</div>
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+  <div class="num">6</div>
+  <div class="num">7</div>
+  <div class="num">8</div>
+  <div class="num">9</div>
+</div>
+  
+      <script id="rendered-js" >
+let size = 86;
+let columns = Array.from(document.getElementsByClassName('column'));
+let d, c;
+let classList = ['visible', 'close', 'far', 'far', 'distant', 'distant'];
+let use24HourClock = true;
+
+function padClock(p, n) {
+  return p + ('0' + n).slice(-2);
+}
+
+function getClock() {
+  d = new Date();
+  return [
+  use24HourClock ? d.getHours() : d.getHours() % 12 || 12,
+  d.getMinutes(),
+  d.getSeconds()].
+
+  reduce(padClock, '');
+}
+
+function getClass(n, i2) {
+  return classList.find((class_, classIndex) => Math.abs(n - i2) === classIndex) || '';
+}
+
+let loop = setInterval(() => {
+  c = getClock();
+
+  columns.forEach((ele, i) => {
+    let n = +c[i];
+    let offset = -n * size;
+    ele.style.transform = `translateY(calc(50vh + ${offset}px - ${size / 2}px))`;
+    Array.from(ele.children).forEach((ele2, i2) => {
+      ele2.className = 'num ' + getClass(n, i2);
+    });
+  });
+}, 200 + Math.E * 10);
+//# sourceURL=pen.js
+    </script>
+
+  
+</body>
+
+</html>
