@@ -17,171 +17,273 @@
 
 
   
-  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
 
-  <title>CSS Clock</title>
 
-    <link rel="canonical" href="https://codepen.io/nilsynils/pen/EZzyVB">
-  
-  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+  <title>JS+CSS Clock with Sound</title>
 
+    <link rel="canonical" href="https://codepen.io/ahmadbassamemran/pen/WdKQyx">
+  <meta name="keywords" content="Developer, Designer, Menu, Hamburger Icons Animations, CSS3, HTML, Buttons, Web, animation, animations, hamburger, icon, icons, span, transition, transform ">
   
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>
   
 <style>
-body {
-    background: url('https://images.unsplash.com/photo-1521459467264-802e2ef3141f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3024&q=80') ;
-    background-size: 50%;
+body{
+    background-color: coral;
+    padding: 0;
+    margin: 0;
 }
-section {
-    width: 80vmin;
-    height: 80vmin;
-    margin: auto;
-    background: #fff url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3358&q=80') center center;
-    border: 3vmin solid #000;
+
+.clock{
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    margin-top: 3vmin;
-    box-shadow: 
-        inset 40px 40px 90px rgba(0,0,0,.2),
-        inset 10px 10px 30px rgba(0,0,0,.5), 
-        20px 20px 30px rgba(0,0,0,.4),
-        40px 40px 60px rgba(0,0,0,.4);
+    background-color: antiquewhite;
+    margin: 100px auto 0px auto;
     position: relative;
-    z-index: 1;
-}
+    border:20px solid cornsilk;
 
-section:before {
-    content: '';
-    width: 95%;
-    height: 95%;
+}
+.center{
+    background-color: #000;
+    position: absolute;
+    left: calc(50% - 10px);
+    top:  calc(50% - 10px);
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
+    z-index: 20;
+}
+.hourHand{
+    width: 10px;
+    height: 75px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 75px;
+    left: 145px;
+    z-index: 10;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      transform: rotate(360deg);
+
+}
+.minuteHand{
+    width: 5px;
+    height: 120px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 147px;
+    z-index: 9;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      transform: rotate(90deg);
+
+}
+.secondHand{
+    width: 2px;
+    height: 120px;
+    background-color:red;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 149px;
+    transition: all 0.06s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    z-index: 8;  
+      transform: rotate(360deg);
+
+}
+.time{
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    border: 1px solid #fff8dc;
+    background-color: #fff;
+    padding: 5px;
     display: block;
-    background: transparent;
-    border: 2vmin solid white;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,.4);
+    border-radius: 5px;
+    min-width: 70px;
+    height: 15px;
+
+}
+.time small{
+    color:red;
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
-/* highlight at top left of black outline */
-section:after {
-    content: '';
-    width: 105%;
-    height: 105%;
-    border-radius: 50%;
-    display: block;
-    background: transparent;
+.clock ul{
+    list-style: none;
+    padding: 0;
+
+}
+.clock ul li{
     position: absolute;
-    top: -2.5%;
-    left: -2.5%;
-    box-shadow: -3px -3px 9px rgba(255,255,255,.8);
+    width:20px;
+    height:20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+    color:red;
+}
+.clock ul li:nth-child(1){
+    right: 22%;
+    top:6.5%;
+}
+.clock ul li:nth-child(2){
+    right: 6%;
+    top:25%;
+}
+.clock ul li:nth-child(3){
+    right: 1%;
+    top:calc(50% - 10px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(4){
+    right: 6%;
+    top:69%;
+}
+.clock ul li:nth-child(5){
+    right: 22%;
+    top:84%;
+}
+.clock ul li:nth-child(6){
+    right: calc(50% - 10px);
+    top:calc(99% - 20px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(7){
+    left: 22%;
+    top:84%;
+}
+.clock ul li:nth-child(8){
+    left: 6%;
+    top:69%;
+}
+.clock ul li:nth-child(9){
+    left: 1%;
+    top:calc(50% - 10px);
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.clock ul li:nth-child(10){
+    left: 6%;
+    top:25%;
+}
+.clock ul li:nth-child(11){
+    left: 22%;
+    top:6.5%;
+}
+.clock ul li:nth-child(12){
+    right: calc(50% - 10px);
+    top:1%;
+    color:#000;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.label {
-    position: absolute;
-    top: 19vmin;
-    left: 46%;
-    font-size: 2.5vmin;
+
+
+
+/*  footer   */
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
 }
 
-.hourhand,
-.secondhand,
-.minutehand {
-    width: 25vmin;
-    height: 2vmin;
-    background: #000;
-    position: absolute;
-    top: 40vmin;
-    left: calc(50% - 3.5vmin);
-    z-index: 2;
-    transform: rotate(-139deg);
-    transform-origin: 16%;
-    -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
-	drop-shadow: (12px 12px 7px rgba(0,0,0,0.5));
+footer p {
+    margin: 10px 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida  Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-.hourhand:after,
-.secondhand:after,
-.minutehand:after {
-    content: '';
-    background: #000;
-    width: 5vmin;
-    height: 5vmin;
-    border-radius: 50%;
-    z-index: 3;
-    position: absolute;
-    top: -1.5vmin;
-    left: 1.5vmin;
+footer .fa-heart{
+    color: red;
 }
-
-.hourhand {
-    border-top-right-radius: 20%;
-    border-bottom-right-radius: 20%;
-    box-shadow: -10px 0px 10px rgba(0,0,0,.4);
+footer .fa-dev{
+    color: #fff;
 }
-
-.minutehand {
-    width: 40vmin;
-    height: 1vmin;
-    top: 40.5vmin;
-    transform: rotate(-39deg);
-    transform-origin: 10%;
-    border-top-right-radius: 30%;
-    border-bottom-right-radius: 30%;
-    box-shadow: -10px 10px 10px rgba(0,0,0,.4);
+footer .fa-twitter-square{
+  color:#1da0f1;
 }
-
-.minutehand:before {
-        content: '';
-        width: 4.5vmin;
-        height: 4.5vmin;
-        border-radius: 50%;
-        z-index: 99;
-        position: absolute;
-        top: -1.7vmin;
-        left: 1.7vmin;
-        box-shadow: -2px -2px 7px rgba(255,255,255,.6);
-    }
-
-.minutehand:after {
-    top: -2vmin;
+footer .fa-instagram{
+  color: #f0007c;
 }
-
-.secondhand {
-    width: 35vmin;
-    height: .5vmin;
-    top: 40.75vmin;
-    transform: rotate(160deg);
-    transform-origin: 11.5%;
-    box-shadow: -10px -10px 10px rgba(0,0,0,.4);
+fotter .fa-linkedin{
+  color:#0073b1;
 }
-.secondhand:after {
-    top: -2.25vmin;
+footer .fa-codepen{
+  color:#fff
 }
-
-.hour12,
-.hour1,
-.hour2,
-.hour3,
-.hour4,
-.hour5 {
-    height: 1vmin;
-    width: 55vmin;
-    background: transparent;
-    border-left: 7vmin solid #000;
-    border-right: 7vmin solid #000;
-    transform: translate(-50%, -50%);
-/*     transform-origin: right bottom; */
-    top: 50%;
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+  margin-right:5px;
+}
+.youtubeBtn{
+    position: fixed;
     left: 50%;
-    position: absolute;
+  transform:translatex(-50%);
+    bottom: 45px;
+    cursor: pointer;
+    transition: all .3s;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+}
+.youtubeBtn i{
+   font-size:20px;
+  float:left;
+}
+.youtubeBtn a{
+    color:#ff0000;
+    animation: youtubeAnim 1000ms linear infinite;
+  float:right;
+}
+.youtubeBtn a:hover{
+  color:#c9110f;
+  transition:all .3s ease-in-out;
+}
+.youtubeBtn i:active{
+  transform:scale(.9);
+  transition:all .3s ease-in-out;
+}
+.youtubeBtn span{
+    font-family: 'Lato';
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    float: right;
+    line-height: 20px;
+    padding-left: 5px;
+  
 }
 
-.hour3 { transform: rotate(90deg) translate(0, 34vmin); }
-
-.hour1 { transform: rotate(120deg) translate(17vmin, 30vmin); }
-
-.hour2 { transform: rotate(150deg) translate(29vmin, 18vmin); }
-
-.hour4 { transform: rotate(210deg) translate(30vmin, -17vmin); }
-
-.hour5 { transform: rotate(240deg) translate(17vmin, -30vmin); }
+@keyframes youtubeAnim{
+  0%,100%{
+    color:#c9110f;
+  }
+  50%{
+    color:#ff0000;
+  }
+}
+/* footer  */
 </style>
 
   <script>
@@ -193,20 +295,90 @@ section:after {
 </head>
 
 <body translate="no">
-  <section>
-    <div class="label">SEIKO</div>
-    <div class="hourhand"></div>
-    <div class="secondhand"></div>
-    <div class="minutehand"></div>
-    <div class="hour12"></div>
-    <div class="hour1"></div>
-    <div class="hour2"></div>
-    <div class="hour3"></div>
-    <div class="hour4"></div>
-    <div class="hour5"></div>
-</section>
+  <div class="clock">
+        <div class="hourHand"></div>
+        <div class="minuteHand"></div>
+        <div class="secondHand"></div>
+        <div class="center"></div>
+        <div class="time"></div>
+        <ul>
+            <li><span>1</span></li>
+            <li><span>2</span></li>
+            <li><span>3</span></li>
+            <li><span>4</span></li>
+            <li><span>5</span></li>
+            <li><span>6</span></li>
+            <li><span>7</span></li>
+            <li><span>8</span></li>
+            <li><span>9</span></li>
+            <li><span>10</span></li>
+            <li><span>11</span></li>
+            <li><span>12</span></li>
+        </ul>
+    </div>
+
+    <audio src="https://sampleswap.org/samples-ghost/DRUMS%20and%20SINGLE%20HITS/snares/5[kb]sidestick.aif.mp3" class="audio"   ></audio>
+
+
+
+<footer>
+  <p>
+		Created with <i class="fa fa-heart"></i> by
+		<a target="_blank" href="https://codepen.io/ahmadbassamemran/">Ahmad Emran</a>
+    Follow me : 
+      <a target="_blank"  href="https://www.instagram.com/ahmadbassamemran/"><i class="fab fa-instagram"></i></a>
+    <a target="_blank"  href="https://www.linkedin.com/in/ahmademarn/"><i class="fab fa-linkedin"></i></a>
+    <a target="_blank" href="https://codepen.io/ahmadbassamemran/"><i class="fab fa-codepen"></i></a> 
+        <a target="_blank" href="https://dev.to/ahmadbassamemran"><i class="fab fa-dev"></i></a> 
+             <a target="_blank" href="https://twitter.com/ahmadbassamemra"><i class="fab fa-twitter-square"></i></a> 
+	</p>
+</footer>
+
+<div class="youtubeBtn">
+  <a target="_blank" href="https://www.youtube.com/AhmadEmran?sub_confirmation=1">
+      <span>Watch on YouTube</span>
+  <i class="fab fa-youtube"></i>
+    </a>
+
+</div>
   
-  
+      <script id="rendered-js" >
+window.onload = function () {
+
+  const hourHand = document.querySelector('.hourHand');
+  const minuteHand = document.querySelector('.minuteHand');
+  const secondHand = document.querySelector('.secondHand');
+  const time = document.querySelector('.time');
+  const clock = document.querySelector('.clock');
+  const audio = document.querySelector('.audio');
+
+  function setDate() {
+    const today = new Date();
+
+    const second = today.getSeconds();
+    const secondDeg = second / 60 * 360 + 360;
+    secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
+    audio.play();
+
+    const minute = today.getMinutes();
+    const minuteDeg = minute / 60 * 360;
+    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+
+    const hour = today.getHours();
+    const hourDeg = hour / 12 * 360;
+    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+
+    time.innerHTML = '<span>' + '<strong>' + hour + '</strong>' + ' : ' + minute + ' : ' + '<small>' + second + '</small>' + '</span>';
+
+  }
+
+  setInterval(setDate, 1000);
+
+};
+//# sourceURL=pen.js
+    </script>
+
   
 </body>
 
