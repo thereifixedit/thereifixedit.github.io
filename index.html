@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>The Bennetts Online</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bennetts Online</title>
   <link href="https://thebennettsonline.com/assets/favicon.png" rel="shortcut icon">
 
-  <style>
-    :root {
-      --accent: #4fc3f7;
-      --glass: rgba(255,255,255,0.12);
-    }
+  <!-- Font Awesome for footer icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background-image: url("https://thebennettsonline.com/assets/gears.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+        url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1920&q=80")
+        no-repeat center center / cover;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -32,171 +33,178 @@
     }
 
     .container {
-      text-align: center;
-      padding: 3rem 2rem;
-      max-width: 900px;
+      max-width: 1100px;
       width: 100%;
+      padding: 3rem 2rem;
+      text-align: center;
+      animation: fadeIn 1.2s ease forwards;
     }
 
-    /* ===== Title ===== */
     h1 {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      margin-bottom: 2.5rem;
-      color: #f5f7fa;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     }
 
-    /* ===== Subtle gradient panel ===== */
-    .grid-panel {
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.15)
-      );
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
-      backdrop-filter: blur(4px);
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      opacity: 0.95;
+      margin-bottom: 3rem;
     }
 
-    .icon-grid {
+    .links {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
 
-    .icon-link {
-      position: relative;
-      height: 120px;
-      background: var(--glass);
+    .card {
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
       border-radius: 18px;
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 2rem 1.75rem;
       text-decoration: none;
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      color: #d6d6d6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+      animation: cardFadeUp 0.8s ease forwards;
     }
 
-    .icon-link:hover,
-    .icon-link:focus-visible {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      background: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
     }
 
-    .icon,
-    .label {
-      position: absolute;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      color: #ffffff;
+    .card img {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 1rem;
+      opacity: 0.9;
     }
 
-    .icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .label {
-      opacity: 0;
-      transform: scale(0.96);
-      font-size: 1rem;
+    .card h2 {
+      font-size: 1.3rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
+      margin-bottom: 0.75rem;
+      color: #e0e0e0;
     }
 
-    .icon-link:hover .icon,
-    .icon-link:focus-visible .icon {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-
-    .icon-link:hover .label,
-    .icon-link:focus-visible .label {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* Custom icon image */
-    .icon img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #cfcfcf;
+      opacity: 0.9;
     }
 
     .footer {
-      margin-top: 3rem;
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.75rem;
+      margin-top: 1rem;
     }
 
-    .footer svg {
-      width: 28px;
-      height: 28px;
-      stroke: rgba(255,255,255,0.85);
-      transition: stroke 0.2s ease, transform 0.2s ease;
+    .footer a {
+      color: #ffffff;
+      font-size: 1.6rem;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    .footer a:hover svg {
-      stroke: var(--accent);
+    .footer a:hover {
+      color: #9fd3ff;
       transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-height: 700px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      .links {
+        margin-bottom: 2rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <main class="container">
     <h1>The Bennetts Online</h1>
+    <p class="subtitle">
+      A central hub for professional work, reflections, and digital projects.<br />
+      Content and descriptions can be updated as this space evolves.
+    </p>
 
-    <div class="grid-panel">
-      <div class="icon-grid">
-        <a class="icon-link" href="https://brainbox9.weebly.com/">
-          <div class="icon">
-            <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="">
-          </div>
-          <div class="label">Teaching</p>Portfolio</div>
-        </a>
-
-        <a class="icon-link" href="https://professionaldevelopmentlog.blogspot.com/">
-          <div class="icon">
-            <img src="https://thebennettsonline.com/assets/journal.png" alt="">
-          </div>
-          <div class="label">Professional</p>Journal</div>
-        </a>
-
-        <a class="icon-link" href="http://192.168.0.16:6060/">
-          <div class="icon">
-            <img src="https://thebennettsonline.com/assets/books.png" alt="">
-          </div>
-          <div class="label">Library</p>Server</div>
-        </a>
-
-        <a class="icon-link" href="#about">
-          <div class="icon">
-            <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="">
-          </div>
-          <div class="label">Other</div>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer">
-      <a href="mailto:davidk.bennett+weblink@gmail.com">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M3 7l9 6 9-6"/>
-        </svg>
+    <section class="links">
+      <a class="card" href="https://brainbox9.weebly.com/" target="_blank" rel="noopener">
+        <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Teaching Portfolio icon" />
+        <h2>Teaching Portfolio</h2>
+        <p>
+          A showcase of teaching philosophy, practice, and classroom innovation.
+        </p>
       </a>
 
-      <a href="https://www.facebook.com/david.bennett.1441" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24">
-          <path d="M9 22V12H6v-3h3V7a4 4 0 0 1 4-4h3v3h-3a1 1 0 0 0-1 1v2h4l-1 3h-3v10"/>
-        </svg>
+      <a class="card" href="https://professionaldevelopmentlog.blogspot.com/" target="_blank" rel="noopener">
+        <img src="https://thebennettsonline.com/assets/journal.png" alt="Professional Journal icon" />
+        <h2>Professional Journal</h2>
+        <p>
+          Ongoing reflections, professional learning, and educational insights.
+        </p>
       </a>
-    </div>
-  </div>
+
+      <a class="card" href="http://192.168.0.16:6060/" target="_blank" rel="noopener">
+        <img src="https://thebennettsonline.com/assets/books.png" alt="Library Server icon" />
+        <h2>Library Server</h2>
+        <p>
+          Internal access point for curated resources and digital collections.
+        </p>
+      </a>
+
+      <a class="card" href="#about">
+        <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Other links icon" />
+        <h2>Other</h2>
+        <p>
+          Additional projects, links, or future content lives here.
+        </p>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <a href="https://www.facebook.com/david.bennett.1441" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="mailto:davidk.bennett+weblink@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </footer>
+  </main>
 </body>
 </html>
