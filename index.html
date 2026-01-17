@@ -1,210 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Bennetts Online</title>
-  <link href="https://thebennettsonline.com/assets/favicon.png" rel="shortcut icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bennetts Online</title>
+    <link href="https://thebennettsonline.com/assets/favicon.png" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-  <!-- Font Awesome for footer icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+        body, html {
+            height: 100%;
+            overflow: hidden; /* Prevents scrolling */
+        }
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
+        /* Background Image Section */
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                        url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
 
-    body {
-      min-height: 100vh;
-      background:
-        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-        url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1920&q=80")
-        no-repeat center center / cover;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        /* Titles with Dark Drop Shadow */
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            animation: fadeInDown 1s ease-out;
+        }
 
-    .container {
-      max-width: 1100px;
-      width: 100%;
-      padding: 3rem 2rem;
-      text-align: center;
-      animation: fadeIn 1.2s ease forwards;
-    }
+        p.subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            animation: fadeInUp 1.2s ease-out;
+        }
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      margin-bottom: 0.75rem;
-      letter-spacing: 1px;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-    }
+        /* Links Container */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            width: 90%;
+            animation: fadeIn 2s ease-in;
+        }
 
-    .subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      opacity: 0.95;
-      margin-bottom: 3rem;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-    }
+        .link-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-    .links {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
+        .link-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-    .card {
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 2rem 1.75rem;
-      text-decoration: none;
-      color: #d6d6d6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-      transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
-      animation: cardFadeUp 0.8s ease forwards;
-    }
+        .link-card img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
 
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
-    }
+        .link-card span {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
 
-    .card img {
-      width: 56px;
-      height: 56px;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-    }
+        .link-card small {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
 
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      margin-bottom: 0.75rem;
-      color: #e0e0e0;
-    }
+        /* Footer / Social Icons */
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 25px;
+            font-size: 1.5rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
 
-    .card p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-      color: #cfcfcf;
-      opacity: 0.9;
-    }
+        .footer a {
+            color: white;
+            transition: opacity 0.3s;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
 
-    .footer {
-      display: flex;
-      justify-content: center;
-      gap: 1.75rem;
-      margin-top: 1rem;
-    }
+        .footer a:hover {
+            opacity: 0.7;
+        }
 
-    .footer a {
-      color: #ffffff;
-      font-size: 1.6rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .footer a:hover {
-      color: #9fd3ff;
-      transform: scale(1.1);
-    }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-    @keyframes cardFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-height: 700px) {
-      .container {
-        padding: 2rem 1.5rem;
-      }
-
-      .links {
-        margin-bottom: 2rem;
-      }
-    }
-  </style>
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .links-grid { grid-template-columns: 1fr; gap: 10px; }
+            .link-card { padding: 15px; }
+        }
+    </style>
 </head>
 <body>
-  <main class="container">
-    <h1>The Bennetts Online</h1>
-    <p class="subtitle">
-      A central hub for professional work, reflections, and digital projects.<br />
-    </p>
 
-    <section class="links">
-      <a class="card" href="https://brainbox9.weebly.com/" target="_blank" rel="noopener">
-        <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Teaching Portfolio icon" />
-        <h2>Teaching Portfolio</h2>
-        <p>
-          A showcase of teaching philosophy, practice, and classroom innovation.
-        </p>
-      </a>
+    <div class="hero-bg">
+        <h1>The Bennetts Online</h1>
+        <p class="subtitle">A central hub for professional work, reflections, and digital projects.</p>
 
-      <a class="card" href="https://professionaldevelopmentlog.blogspot.com/" target="_blank" rel="noopener">
-        <img src="https://thebennettsonline.com/assets/journal.png" alt="Professional Journal icon" />
-        <h2>Professional Journal</h2>
-        <p>
-          Ongoing reflections, professional learning, and educational insights.
-        </p>
-      </a>
+        <div class="links-grid">
+            <a href="https://brainbox9.weebly.com/" class="link-card" target="_blank">
+                <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Teaching Icon">
+                <span>Teaching Portfolio</span>
+                <small>A showcase of teaching philosophy, practice, and classroom innovation.</small>
+            </a>
 
-      <a class="card" href="http://192.168.0.16:6060/" target="_blank" rel="noopener">
-        <img src="https://thebennettsonline.com/assets/books.png" alt="Library Server icon" />
-        <h2>Library Server</h2>
-        <p>
-          Internal access point for curated resources and digital collections.
-        </p>
-      </a>
+            <a href="https://professionaldevelopmentlog.blogspot.com/" class="link-card" target="_blank">
+                <img src="https://thebennettsonline.com/assets/journal.png" alt="Journal Icon">
+                <span>Professional Journal</span>
+                <small>Ongoing reflections, professional learning, and educational insights.</small>
+            </a>
 
-      <a class="card" href="#about">
-        <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Other links icon" />
-        <h2>Other</h2>
-        <p>
-          Additional projects, links, or future content lives here.
-        </p>
-      </a>
-    </section>
+            <a href="http://192.168.0.16:6060/" class="link-card" target="_blank">
+                <img src="https://thebennettsonline.com/assets/books.png" alt="Library Icon">
+                <span>Library Server</span>
+                <small>Local access to digital book collections.</small>
+            </a>
 
-    <footer class="footer">
-      <a href="https://www.facebook.com/david.bennett.1441" target="_blank" rel="noopener" aria-label="Facebook">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a href="mailto:davidk.bennett+weblink@gmail.com" aria-label="Email">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </footer>
-  </main>
+            <a href="#about" class="link-card">
+                <img src="https://thebennettsonline.com/assets/machine-learning.png" alt="Other Icon">
+                <span>Other Projects</span>
+                <small>Miscellaneous links and future explorations.</small>
+            </a>
+        </div>
+
+        <div class="footer">
+            <a href="https://www.facebook.com/david.bennett.1441" target="_blank" title="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="mailto:davidk.bennett+weblink@gmail.com" title="Email Me">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
